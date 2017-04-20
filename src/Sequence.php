@@ -72,9 +72,14 @@ class Sequence
             if ($value instanceof Payload) {
                 throw new RuntimeException('Recursion error. Cannot return a Payload instance into payload key.');
             }
-            $payload->$payloadKey = $value;
+            if ($value !== null) {
+                $payload->$payloadKey = $value;
+            }
         } else {
-            $payload = call_user_func_array($step, $parameterMap);
+            $result = call_user_func_array($step, $parameterMap);
+            if ($result !== null) {
+                $payload = $result;
+            }
         }
 
         return $payload;
@@ -95,7 +100,7 @@ class Sequence
         return $parameters;
     }
 
-    private function mapReflectionParameters($payload, $parameters): array
+    private function mapReflectionParameters($payload, array $parameters): array
     {
         $parameterMap = [];
         foreach ($parameters as [$name, $type]) {
