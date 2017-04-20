@@ -1,6 +1,6 @@
 <?php
 
-class SequenceTest extends PHPUnit_Framework_TestCase
+class SequenceTest extends PHPUnit\Framework\TestCase
 {
 
     public function testNullReturnPayload()
