@@ -5,6 +5,7 @@ class SequenceTest extends PHPUnit\Framework\TestCase
 
     public function testNullReturnPayload()
     {
+        // Setup Payload
         $payload         = new Snelling\Sequence\Payload();
         $payload->number = 1;
 
