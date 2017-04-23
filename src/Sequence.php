@@ -27,7 +27,8 @@ class Sequence
 
     public function run($payload)
     {
-        foreach ($this->steps as [$step, $payloadKey]) {
+
+        foreach ($this->steps as list($step, $payloadKey)) {
             if (!is_callable($step)) {
                 throw new RuntimeException('Step is not Callable');
             }
@@ -103,7 +104,7 @@ class Sequence
     private function mapReflectionParameters($payload, array $parameters): array
     {
         $parameterMap = [];
-        foreach ($parameters as [$name, $type]) {
+        foreach ($parameters as list($name, $type)) {
             if ($name === 'payload') {
                 $parameterMap[] = $payload;
                 continue;
